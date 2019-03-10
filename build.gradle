@@ -1,23 +1,27 @@
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
+        google()
     }
+
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.android.tools.build:gradle:3.3.2'
     }
 }
-apply plugin: 'android'
+
+apply plugin: 'com.android.application'
 
 repositories {
-    mavenCentral()
+    jcenter()
+    google()
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
-    compile 'com.actionbarsherlock:actionbarsherlock:4.4.+@aar'
-    compile 'com.android.support:support-v4:13.0.+'
-    compile 'com.google.code.gson:gson:2.2.+'
-    compile 'org.osmdroid:osmdroid-android:4.+'
+    // compile 'com.android.support:support-v4:13.0.+'
+    compile 'com.android.support:appcompat-v7:28.0.0'
+    compile 'com.google.code.gson:gson:2.8.5'
+    compile 'org.osmdroid:osmdroid-android:4.3'
     compile 'org.slf4j:slf4j-android:1.6.1-RC1'
 }
 
@@ -27,9 +31,35 @@ tasks.whenTaskAdded { task ->
 }
 
 android {
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 28
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        androidTest.setRoot('tests')
+        androidTest.java.srcDirs = ['tests/src']
+    }
+
+    /*
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -53,23 +83,27 @@ android {
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
     }
+    */
 
     lintOptions {
+        disable 'MissingTranslation'
         abortOnError false
     }
 
     signingConfigs {
+        /*
         release {
             storeFile file('android.keystore')
             storePassword ''
             keyAlias 'openmensa'
             keyPassword ''
         }
+        */
 
         buildTypes {
             release {
                 debuggable false
-                signingConfig signingConfigs.release
+                //signingConfig signingConfigs.release
             }
             debug {
                 applicationIdSuffix ".debug"
@@ -79,6 +113,7 @@ android {
 }
 
 task keystoreInfo << {
+    /*
     def console = System.console()
     if (console == null)
         throw new IllegalStateException('no console available, use --no-daemon flag')
@@ -88,4 +123,5 @@ task keystoreInfo << {
 
     android.signingConfigs.release.storePassword = new String(storePassword)
     android.signingConfigs.release.keyPassword = new String(keyPassword)
+    */
 }

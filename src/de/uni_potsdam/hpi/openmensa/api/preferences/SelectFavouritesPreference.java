@@ -29,7 +29,6 @@ import de.uni_potsdam.hpi.openmensa.api.Canteen;
  *
  * TODO: give this a better name or better make it abstract and build a 
  * 		separate preference where entries and entyValues has a concrete implementation
- * TODO: use ListPreferenceMultiSelect as it is compatible with older versions
  */
 public class SelectFavouritesPreference extends MultiSelectListPreference {
 

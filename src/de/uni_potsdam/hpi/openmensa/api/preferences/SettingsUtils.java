@@ -60,12 +60,12 @@ public class SettingsUtils {
     }
     public static int getThemeByString(String theme) {
         if (theme.equalsIgnoreCase("dark")) {
-            return com.actionbarsherlock.R.style.Theme_Sherlock;
+            return R.style.ThemeOverlay_AppCompat_Dark;
         } else if (theme.equalsIgnoreCase("light")) {
-            return com.actionbarsherlock.R.style.Theme_Sherlock_Light;
+            return R.style.Theme_AppCompat_Light;
         } else {
             Log.w(MainActivity.TAG, "Theme not found");
-            return com.actionbarsherlock.R.style.Theme_Sherlock;
+            return R.style.Theme_AppCompat;
         }
     }
 

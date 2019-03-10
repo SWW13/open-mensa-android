@@ -1,11 +1,11 @@
 package de.uni_potsdam.hpi.openmensa;
 
 import android.annotation.SuppressLint;
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Menu;
-import com.actionbarsherlock.view.MenuItem;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBar.OnNavigationListener;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,7 +43,7 @@ import de.uni_potsdam.hpi.openmensa.helpers.RetrieveFeedTask;
 import de.uni_potsdam.hpi.openmensa.helpers.SpinnerItem;
 
 @SuppressLint("NewApi")
-public class MainActivity extends SherlockFragmentActivity implements
+public class MainActivity extends AppCompatActivity implements
 		OnNavigationListener, OnFinishedFetchingCanteensListener, OnFinishedFetchingDaysListener {
 
 	public static final String TAG = "Canteendroid";
@@ -312,7 +312,7 @@ public class MainActivity extends SherlockFragmentActivity implements
 		}
 		
 		Log.d(TAG, String.format("Spinner items: %s", spinnerItems));
-		
+
 		ActionBar actionBar = getSupportActionBar();
 		spinnerAdapter = new ArrayAdapter<SpinnerItem>(this, android.R.layout.simple_spinner_dropdown_item, spinnerItems);
 		actionBar.setListNavigationCallbacks(spinnerAdapter, this);
@@ -355,7 +355,7 @@ public class MainActivity extends SherlockFragmentActivity implements
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getSupportMenuInflater().inflate(R.menu.menu_main, menu);
+		getMenuInflater().inflate(R.menu.menu_main, menu);
 		return true;
 	}
 
